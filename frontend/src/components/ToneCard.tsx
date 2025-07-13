@@ -18,10 +18,10 @@ export default function ToneCard({ imageUrl, title, description, altText }: Tone
       </div>
       
       <div className="p-6">
-        <h3 className="text-xl font-semibold text-white mb-3 line-clamp-2">
+        <h3 className="text-xl font-semibold text-white mb-3">
           {title}
         </h3>
-        <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
+        <p className="text-gray-300 text-sm leading-relaxed">
           {description}
         </p>
       </div>

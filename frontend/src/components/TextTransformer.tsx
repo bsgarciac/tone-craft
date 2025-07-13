@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Loader from "./ui/Loader";
 
 interface TextTransformPanelProps {
   onTransform: (text: string) => void;
@@ -15,6 +16,7 @@ export default function TextTransformPanel({ onTransform, onCancel, isLoading = 
   };
 
   const handleCancelClick = () => {
+    setText("");
     onCancel();
   };
 
@@ -33,14 +35,16 @@ export default function TextTransformPanel({ onTransform, onCancel, isLoading = 
         <button
           onClick={handleTransformClick}
           disabled={isLoading}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors flex items-center gap-2"
         >
+          {isLoading && (
+            <Loader />
+          )}
           Transform
         </button>
         <button
           onClick={handleCancelClick}
-          disabled={!isLoading}
-          className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 disabled:opacity-50 transition-colors"
+          className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 disabled:opacity-50 transition-colors flex items-center gap-2"
         >
           Cancel
         </button>
