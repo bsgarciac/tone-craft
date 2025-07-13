@@ -2,3 +2,7 @@ fastapi
 openai
 uvicorn
 python-dotenv
+pytest
+pytest-asyncio
+httpx
+pytest-mock

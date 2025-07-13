@@ -2,11 +2,10 @@ from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import os
 import asyncio
+from app.utils import get_style_prompt
+
 load_dotenv()
 
-
-def get_style_prompt(style: str, text: str):
-    return f"Rephrase the following in a {style} style: \\n {text}"
 
 class OpenAIClient:
 
