@@ -9,6 +9,7 @@ import socialMediaIcon from './assets/social_media.svg';
 
 type Style = 'professional' | 'casual' | 'polite' | 'social_media';
 type Outputs = Record<Style, string>;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const styleMeta = [
   {
@@ -55,7 +56,7 @@ function App() {
       social_media: "",
     });
 
-    const source = new EventSource(`http://localhost:8000/process?text=${encodeURIComponent(text)}`);
+    const source = new EventSource(`${backendUrl}/process?text=${encodeURIComponent(text)}`);
     setEventSource(source);
 
 
