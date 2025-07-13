@@ -1,3 +1,8 @@
 ve/
 __pycache__/
 .env
+
+node_modules/
+.vscode/
+dist/
+.vite/
