@@ -1,12 +1,10 @@
 from openai import OpenAI
-import openai
-import json
 from dotenv import load_dotenv
 import os
 load_dotenv()
 
 
-def rephrase_text(text: str):
+async def rephrase_text(text: str):
     prompt = f"""Rephrase the following text in four different writing styles:
 
     Input: "{text}"
@@ -27,6 +25,12 @@ def rephrase_text(text: str):
     stream = client.responses.create(
         model="gpt-4o-mini",
         input=prompt,
+        stream=True
     )
 
-    return json.loads(stream.output_text)
+    for event in stream:
+        if 'output_text' in event.type and hasattr(event, 'delta'):
+            yield f'data: {event.delta}\n\n'
+
+    yield 'data: [DONE]\n\n'
+    

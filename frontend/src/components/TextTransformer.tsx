@@ -1,20 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
 export default function TextTransformPanel() {
   const [text, setText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [eventSource, setEventSource] = useState<EventSource | null>(null);
+  const [output, setOutput] = useState<string>('');
 
   const handleTransformClick = () => {
     if (!text.trim()) return;
 
     setIsLoading(true);
+    setOutput('');
+
+    const source = new EventSource(`http://localhost:8000/process?text=${encodeURIComponent(text)}`);
+    setEventSource(source);
+
+
+    source.onmessage = (event) => {
+      console.log(event.data)
+      if (event.data === "[DONE]") {
+        source.close();
+        setEventSource(null);
+        return;
+      }
+
+      setOutput((prev) => prev + event.data);
+    };
+
+    source.onerror = () => {
+      source.close();
+      setEventSource(null);
+      console.error("Error in streaming");
+    };
+
   };
 
   const handleCancelClick = () => {
+    if (eventSource) {
+      eventSource.close();
+      setEventSource(null);
+    }
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    return () => {
+      if (eventSource) {
+        eventSource.close();
+      }
+    };
+  }, [eventSource]);
 
   return (
     <div className="bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-2xl mt-10 border border-gray-700">
@@ -42,6 +79,10 @@ export default function TextTransformPanel() {
         >
           Cancel
         </button>
+      </div>
+
+      <div className="mt-6">
+        <pre className="text-gray-300 whitespace-pre-wrap">{output}</pre>
       </div>
     </div>
   );

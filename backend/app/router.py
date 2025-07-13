@@ -1,15 +1,13 @@
 from fastapi import APIRouter
-from app.models import TextInput
+from fastapi.responses import StreamingResponse
 from app.services import rephrase_text
 
 router = APIRouter()
 
 
-@router.post("/process/")
-def process_text(data: TextInput):
+@router.get("/process")
+async def process_text(text: str):
     """
     Process the text and return the transformed text in multiple styles
-
-    TODO: Add streaming response
     """
-    return rephrase_text(data.text)
+    return StreamingResponse(rephrase_text(text), media_type="text/event-stream")
