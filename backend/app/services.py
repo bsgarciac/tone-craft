@@ -1,36 +1,27 @@
-from openai import OpenAI
+from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import os
+import asyncio
 load_dotenv()
 
 
-async def rephrase_text(text: str):
-    prompt = f"""Rephrase the following text in four different writing styles:
+def get_style_prompt(style: str, text: str):
+    return f"Rephrase the following in a {style} style: \\n {text}"
 
-    Input: "{text}"
+class OpenAIClient:
 
-    Styles:
-    - professional
-    - casual
-    - polite
-    - social_media
-     
-    Return in a JSON string format with no extra text or explanation or formatting
-    """
+    def __init__(self): 
+        self.client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-    client = OpenAI(
-        api_key=os.getenv("OPENAI_API_KEY"),
-    )
+    async def rephrase_text(self, style: str, text: str, queue: asyncio.Queue):
+        prompt = get_style_prompt(style, text)
 
-    stream = client.responses.create(
-        model="gpt-4o-mini",
-        input=prompt,
-        stream=True
-    )
+        stream = await self.client.responses.create(
+            model="gpt-4o-mini",
+            input=prompt,
+            stream=True
+        )  
 
-    for event in stream:
-        if 'output_text' in event.type and hasattr(event, 'delta'):
-            yield f'data: {event.delta}\n\n'
-
-    yield 'data: [DONE]\n\n'
-    
+        async for event in stream:
+            if 'output_text' in event.type and hasattr(event, 'delta'):
+                await queue.put(f'data: {style}|{event.delta}\n\n')    
