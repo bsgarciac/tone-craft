@@ -1,4 +1,4 @@
-# 📝 ToneCraft
+# 🎨 ToneCraft
 
 **ToneCraft** is a SPA tool that transforms user-provided text into different communication styles—such as **professional**, **casual**, **polite**, and **social media** by using  large language models (LLMs). The project uses a **FastAPI** backend and a **React** frontend, with real-time **streaming responses** for better user interactivity.
 
