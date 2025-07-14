@@ -5,11 +5,11 @@
 ---
 ## 🛠️ 1. Tech Stack
 
-- ⚙️ FastAPI + Uvicorn
-- 🧠 OpenAI API (Async)
-- ⚛️ React + Vite
-- 💬 Streaming with `StreamingResponse`
-- 🧪 Vitest + Pytest
+- FastAPI + Uvicorn (Python **3.11+**)
+- OpenAI API (Async)
+- React + Vite (Node.js **v20.x**)
+- Streaming with `StreamingResponse`
+- Vitest + Pytest 
 
 ---
 
@@ -26,13 +26,13 @@ To run ToneCraft locally, you need to first set up the backend environment varia
 
 1. Copy `.env.example` file inside the `backend` :
    ```bash
-   cd backend
+   cd tone-craft/backend
    mv .env.example .env
    ```
-2. Add a valid OPENAI_API_KEY
+2. Add a valid OPENAI_API_KEY in .env file
    - This key is required to access the OpenAI API for text rewriting.
    - You can get your API key from [OpenAI's platform](https://platform.openai.com/account/api-keys).
-   - 
+
 ### 🐳 Backend (FastAPI) with Docker
 
 1. Build the Docker image:
@@ -45,7 +45,7 @@ To run ToneCraft locally, you need to first set up the backend environment varia
    docker run -d -p 8000:8000 --env-file .env tonecraft-backend
    ```
 
-### 📦 Backend (FastAPI)
+### 📦 Backend (FastAPI) No Docker
 
 1. Create and activate a virtual environment:
    ```bash
@@ -70,16 +70,18 @@ To run ToneCraft locally, you need to first set up the backend environment varia
    cd ../frontend
    ```
 
-2. Install and use correct node version
+2. Install and use the correct Node.js version (v20)
+
+If you're using [nvm](https://github.com/nvm-sh/nvm), run:
    ```bash
    nvm use
    ```
-2. Install frontend dependencies:
+3. Install frontend dependencies:
    ```bash
    npm install --legacy-peer-deps
    ```
 
-3. Launch the frontend server:
+4. Launch the frontend server:
    ```bash
    npm run dev
    ```
