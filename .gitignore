@@ -1,6 +1,6 @@
 ve/
 __pycache__/
-.env
+backend/.env
 
 node_modules/
 .vscode/
