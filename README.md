@@ -167,7 +167,7 @@ frontend/
 ---
 
 ## 🎥 Demo
-![tonecraft-demo](docs/tonecraft-screenshot.png)
+![tonecraft-demo](docs/tonecraft-demo.png)
 
 ## 🧾 License
 
