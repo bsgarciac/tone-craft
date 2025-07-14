@@ -18,9 +18,21 @@
 Clone the repository:
    ```bash
    git clone git@github.com:bsgarciac/tone-craft.git
-   cd backend
    ```
 
+### 🔐 Environment Variables
+
+To run ToneCraft locally, you need to first set up the backend environment variables.
+
+1. Copy `.env.example` file inside the `backend` :
+   ```bash
+   cd backend
+   mv .env.example .env
+   ```
+2. Add a valid OPENAI_API_KEY
+   - This key is required to access the OpenAI API for text rewriting.
+   - You can get your API key from [OpenAI's platform](https://platform.openai.com/account/api-keys).
+   - 
 ### 🐳 Backend (FastAPI) with Docker
 
 1. Build the Docker image:
@@ -32,24 +44,21 @@ Clone the repository:
    ```bash
    docker run -d -p 8000:8000 --env-file .env tonecraft-backend
    ```
- 
 
 ### 📦 Backend (FastAPI)
 
-
-
-2. Create and activate a virtual environment:
+1. Create and activate a virtual environment:
    ```bash
    python -m venv venv
    source venv/bin/activate 
    ```
 
-3. Install dependencies:
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. Start the FastAPI development server:
+3. Start the FastAPI development server:
    ```bash
    uvicorn app.main:app --reload
    ```
@@ -74,7 +83,6 @@ Clone the repository:
    ```bash
    npm run dev
    ```
-
 > The frontend expects the backend to run at `http://localhost:8000`. You can customize this with an `.env` file.
 
 ---
