@@ -67,7 +67,7 @@ Clone the repository:
    ```
 2. Install frontend dependencies:
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
 3. Launch the frontend server:
