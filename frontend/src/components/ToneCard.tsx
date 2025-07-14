@@ -1,3 +1,6 @@
+import { CopyButton } from "./ui/CopyButton";
+import { toast } from "sonner";
+
 interface ToneCardProps {
   imageUrl: string;
   title: string;
@@ -6,9 +9,14 @@ interface ToneCardProps {
 }
 
 export default function ToneCard({ imageUrl, title, description, altText }: ToneCardProps) {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(description);
+    toast.success("Copied to clipboard");
+  }
   return (
     <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:shadow-xl">
       <div className="relative">
+        <CopyButton onClick={handleCopy} />
         <img 
           src={imageUrl} 
           alt={altText || title}

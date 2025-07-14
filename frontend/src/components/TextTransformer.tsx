@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Loader from "./ui/Loader";
+import { toast } from "sonner";
 
 interface TextTransformPanelProps {
   onTransform: (text: string) => void;
@@ -11,7 +12,10 @@ export default function TextTransformPanel({ onTransform, onCancel, isLoading = 
   const [text, setText] = useState("");
 
   const handleTransformClick = () => {
-    if (!text.trim()) return;
+    if (!text.trim()) {
+      toast.error("Please enter some text to transform");
+      return;
+    }
     onTransform(text);
   };
 

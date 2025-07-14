@@ -3,8 +3,17 @@
 **ToneCraft** is a SPA tool that transforms user-provided text into different communication styles—such as **professional**, **casual**, **polite**, and **social media** by using  large language models (LLMs). The project uses a **FastAPI** backend and a **React** frontend, with real-time **streaming responses** for better user interactivity.
 
 ---
+## 🛠️ 1. Tech Stack
 
-## 🚀 1. Setup Instructions
+- ⚙️ FastAPI + Uvicorn
+- 🧠 OpenAI API (Async)
+- ⚛️ React + Vite
+- 💬 Streaming with `StreamingResponse`
+- 🧪 Vitest + Pytest
+
+---
+
+## 🚀 2. Setup Instructions
 
 Clone the repository:
    ```bash
@@ -70,7 +79,7 @@ Clone the repository:
 
 ---
 
-## 🧠 2. Design Decisions
+## 🧠 3. Design Decisions
 
 ### Async and Streaming
 The backend utilizes **`asyncio`** to handle asynchronous, non-blocking operations. This architecture supports concurrent client connections and enables real-time token streaming.
@@ -85,7 +94,7 @@ This tradeoff prioritizes usability and quality over optimization, which aligns 
 
 ---
 
-## 🗂️ 3. Project Structure
+## 🗂️ 4. Project Structure
 
 ### Backend (`/backend`)
 ```
@@ -119,7 +128,7 @@ frontend/
 
 ---
 
-## ✅ 4. Testing Strategy
+## ✅ 5. Testing Strategy
 
 ### Backend – `pytest`
 - Located in `backend/tests/`
@@ -144,7 +153,7 @@ frontend/
 
 ---
 
-## 🔮 5. Future Improvements and Extensions
+## 🔮 6. Future Improvements and Extensions
 
 1. **Redis Caching**  
    Use Redis to cache previously seen input-tone pairs to minimize redundant LLM API calls and reduce latency.
@@ -156,6 +165,9 @@ frontend/
    Add login support (JWT) and enforce per-user request limits for production-readiness.
 
 ---
+
+## 🎥 Demo
+![tonecraft-demo](docs/tonecraft-screenshot.png)
 
 ## 🧾 License
 

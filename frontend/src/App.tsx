@@ -6,6 +6,7 @@ import professionalIcon from './assets/professional.svg';
 import casualIcon from './assets/casual.svg';
 import politeIcon from './assets/polite.svg';
 import socialMediaIcon from './assets/social_media.svg';
+import { Toaster, toast } from "sonner";
 
 type Style = 'professional' | 'casual' | 'polite' | 'social_media';
 type Outputs = Record<Style, string>;
@@ -85,6 +86,12 @@ function App() {
       source.close();
       setEventSource(null);
       setIsLoading(false);
+      toast.error("Unexpected error, please try again later", {
+        style: {
+          backgroundColor: "#FEF2F2",
+          color: "#991B1B",
+        }
+      });
       console.error("Error in streaming");
     };
   };
@@ -115,6 +122,8 @@ function App() {
 
   return (
     <div className='min-h-screen bg-gray-900'>
+      <Toaster />
+
       <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center max-w-4xl mx-auto px-4 py-10">
         <h1 className="text-4xl font-bold text-blue-400">🎨 ToneCraft</h1>
         <p className="mt-4 text-lg text-gray-300">
